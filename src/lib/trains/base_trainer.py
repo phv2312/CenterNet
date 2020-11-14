@@ -72,6 +72,7 @@ class BaseTrainer(object):
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
+
       batch_time.update(time.time() - end)
       end = time.time()
 

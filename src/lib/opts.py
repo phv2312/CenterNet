@@ -12,7 +12,7 @@ class opts(object):
     # basic experiment setting
     self.parser.add_argument('task', default='ctdet',
                              help='ctdet | ddd | multi_pose | exdet')
-    self.parser.add_argument('--dataset', default='coco',
+    self.parser.add_argument('--dataset', default='coco_zalo',
                              help='coco | kitti | coco_hp | pascal')
     self.parser.add_argument('--exp_id', default='default')
     self.parser.add_argument('--test', action='store_true')
@@ -44,7 +44,7 @@ class opts(object):
                              help='random seed') # from CornerNet
 
     # log
-    self.parser.add_argument('--print_iter', type=int, default=0, 
+    self.parser.add_argument('--print_iter', type=int, default=1,
                              help='disable progress bar and print to screen.')
     self.parser.add_argument('--hide_data_time', action='store_true',
                              help='not display time during training.')
@@ -58,7 +58,7 @@ class opts(object):
                              choices=['white', 'black'])
     
     # model
-    self.parser.add_argument('--arch', default='dla_34', 
+    self.parser.add_argument('--arch', default='hourglass',
                              help='model architecture. Currently tested'
                                   'res_18 | res_101 | resdcn_18 | resdcn_101 |'
                                   'dlav0_34 | dla_34 | hourglass')
@@ -74,9 +74,9 @@ class opts(object):
     self.parser.add_argument('--input_res', type=int, default=-1, 
                              help='input height and width. -1 for default from '
                              'dataset. Will be overriden by input_h | input_w')
-    self.parser.add_argument('--input_h', type=int, default=-1, 
+    self.parser.add_argument('--input_h', type=int, default=512,
                              help='input height. -1 for default from dataset.')
-    self.parser.add_argument('--input_w', type=int, default=-1, 
+    self.parser.add_argument('--input_w', type=int, default=512*3,
                              help='input width. -1 for default from dataset.')
     
     # train
@@ -92,7 +92,7 @@ class opts(object):
                              help='batch size on the master gpu.')
     self.parser.add_argument('--num_iters', type=int, default=-1,
                              help='default: #samples / batch_size.')
-    self.parser.add_argument('--val_intervals', type=int, default=5,
+    self.parser.add_argument('--val_intervals', type=int, default=15,
                              help='number of epochs to run validation.')
     self.parser.add_argument('--trainval', action='store_true',
                              help='include validation in training and '
