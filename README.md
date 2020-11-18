@@ -8,6 +8,32 @@ Object detection, 3D detection, and pose estimation using center point detection
 
 Contact: [zhouxy@cs.utexas.edu](mailto:zhouxy@cs.utexas.edu). Any questions or discussions are welcomed! 
 
+## How to install (locally)
+
+- Step 1: please following the [link](https://medium.com/@exesse/cuda-10-1-installation-on-ubuntu-18-04-lts-d04f89287130) to install **CUDA 10.0** and import the 
+conda environment (**zalo_centernet_environment.yml**) (the important here is Pytorch 1.2.0 & cudatoolkit 10.0).
+~~~
+conda env create -f zalo_centernet_environment.yml
+conda activate zalo
+~~~
+
+- Step 2: install DCNv2, please remove the directory DCNv2 by running the following codes:
+~~~
+# update the new source
+cd $SOURCE_ROOT/src/lib/models/networks
+rm -r -f DCNv2
+git clone https://github.com/CharlesShang/DCNv2.git
+
+# then install DCNv2 directory
+cd DCNv2
+make
+
+# if using inference, nms is must, go to nms directory & install
+cd $SOURCE_ROOT/src/lib/external
+make
+~~~
+
+- Step 3: download pre-trained weights from [here](https://drive.google.com/file/d/1Cgr7JSiBDsKccmPT9KrsQjPLcZndVLOy/view?usp=sharing), replace **model_path** in **src/inference.py**.
 ## Updates
 
  - (June, 2020) We released a state-of-the-art Lidar-based 3D detection and tracking framework [CenterPoint](https://github.com/tianweiy/CenterPoint).
